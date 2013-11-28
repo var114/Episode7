@@ -1,15 +1,22 @@
 class SalesPerson
 
   attr_reader :cities
+
   def initialize
-    @cities = []
+    @cities = [] 
   end
 
   def schedule_city(city)
     @cities << city unless @cities.include?(city)
   end
 
-  def route
-    CalculatesRoute.calculate(cities)
+  def find_point(start_name)
+    start = @cities.select {|city| city if city.name == start_name }
+    start.first
+
+  end
+
+  def route(starting_point)
+    CalculatesRoute.calculate(cities, find_point(starting_point))
   end
 end
