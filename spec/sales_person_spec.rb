@@ -30,7 +30,6 @@ it "should calculate route via the CalculatesRoute" do
   cities = [start, point]
   subject.stub(:cities) { cities }
   CalculatesRoute.should_receive(:calculate).with(cities, start)
-  #subject.route(start)
 end
 
 it "should returns the route from CalculatesRoute" do 

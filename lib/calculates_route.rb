@@ -8,10 +8,9 @@ class CalculatesRoute
     until remaining_points == [] do
       next_point = shortest_distance(route.last, remaining_points)
       puts "from: #{route.last} ... to: #{next_point}"
-      route << remaining_points.slice!(remaining_points.index(next_point))
-      
+      route << remaining_points.slice!(remaining_points.index(next_point))      
     end
-       route
+      # p route
   end
 
   def self.shortest_distance(from, possible)

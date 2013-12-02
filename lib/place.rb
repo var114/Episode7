@@ -1,6 +1,6 @@
 require_relative "./map"
 
-class Place
+class Place  
   attr_accessor :name, :coordinates 
 
   def self.build(name)
@@ -8,7 +8,8 @@ class Place
     results = Map.search(name)
     Place.new.tap do |p|
       p.name = name
-      p.coordinates = results.coordinates  
+      #puts name
+      p.coordinates = results.coordinates   
     end
   end
 
