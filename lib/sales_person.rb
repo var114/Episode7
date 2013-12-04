@@ -24,9 +24,6 @@ class SalesPerson
     y = results.fetch(:time)
     z = [x, y]
     return z
-
-   
-  
   end
 
   def traveling_time(distance)
