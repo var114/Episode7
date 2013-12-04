@@ -18,27 +18,27 @@ require 'rspec'
     end
 
     it "should find a starting point" do
-      cities = [stub, stub, stub]
-      start = stub
-      subject.find_city(start).should eq(start)
+      city = stub
+      city.stub(name: "Austin, TX")
+      subject.schedule_city(city)
+      subject.find_city("Austin, TX").should eq(city)
     end
-# route needs to use CalcuatesRoute.calculate method to return the correct 
-# arrangement of cities
     it "should be able to calcuate the route via CalculatesRoute" do
-      start = stub("Austin, TX")
-      point = stub("Los Angeles, CA")
+      start = stub(name: "Austin, TX")
+      point = stub(name: "Los Angeles, CA")
       cities = [start, point]
       subject.stub(:cities) {cities}
       CalculatesRoute.should_receive(:calculate).with(cities, start)
-      #subject.route
+      subject.route("Austin, TX")
     end
 
     it "should return the route from CalcuatesRoute" do
-      start = [stub]
-      route_stub = [stub, stub]
+      route = [stub("Austin, Tx"), stub("Los Angeles, CA")]
+      start = stub("Austin, TX")
       cities = [stub, stub, stub]
-      CalculatesRoute.stub(:calculate) {[start, route_stub]}
-      subject.route.should eq([stub, stub, stub])
+      CalculatesRoute.stub(:calculate) {route}
+      CalculatesRoute.stub(:route).and_return(route)
+      subject.route.(start).should eq(route)
 
 
     end

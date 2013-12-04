@@ -21,11 +21,11 @@ puts '------------------------'
 puts phil.route(starting_point)
 
 
-
 texas_cities = []
 texas = Nokogiri::HTML(open('http://www.texas.gov/en/discover/Pages/topic.aspx?topicid=/government/localgov'))
 texas.css(" .topic-subcategory-link a").map do |node|
-  texas_cities << node.content
+   texas_cities << node.content
+
   #puts node.content
 end
 
@@ -36,7 +36,7 @@ bench_var = [2, 3]
     texas_cities.shuffle.take(var).each do |city|
       content.schedule_city(Place.build(city))
   end
-  
+
   Benchmark.bm do |x|
     x.report do
     starting_point = "Austin, Texas"

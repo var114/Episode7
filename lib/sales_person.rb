@@ -21,11 +21,8 @@ class SalesPerson
     city = find_city(start)
     display = CalculatesRoute.calculate(cities, city)
     results = {route: display.fetch(:route), time: traveling_time(display.fetch(:distance))}
-    z = []
-    x = results.fetch(:route) 
-    y = results.fetch(:time)
-    z = [x, y]
-    return z
+    return [results.fetch(:route), results.fetch(:time)]
+  
   end
 
   def traveling_time(distance)
