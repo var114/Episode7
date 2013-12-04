@@ -16,35 +16,35 @@ phil.schedule_city(Place.build("Berkeley, San Francisco"))
 phil.schedule_city(Place.build("Los Angeles, CA"))
 phil.schedule_city(Place.build("San Diego, CA"))
 starting_point = "Austin, TX"
+puts phil.cities
+puts '------------------------'
 puts phil.route(starting_point)
+
 
 
 texas_cities = []
 texas = Nokogiri::HTML(open('http://www.texas.gov/en/discover/Pages/topic.aspx?topicid=/government/localgov'))
 texas.css(" .topic-subcategory-link a").map do |node|
   texas_cities << node.content
+  #puts node.content
 end
 
-puts "Count for cities in Texas #{texas_cities.count}"
-#puts texas_cities
 
-
-bench_vals = [2]
-bench_vals.each do |val|
-  current = SalesPerson.new
-  texas_cities.shuffle.take(val).each do |city|
-    current.schedule_city(Place.build(city))
-
-
-the_route = []
-puts "\nBenchmarking results for #{val} cities:"
+bench_var = [2, 3]
+  bench_var.each do |var|
+    content = SalesPerson.new
+    texas_cities.shuffle.take(var).each do |city|
+      content.schedule_city(Place.build(city))
+  end
+  
   Benchmark.bm do |x|
     x.report do
-      the_route = current.route("Austin, TX")
+    starting_point = "Austin, Texas"
+    y = content.route(starting_point)
+    puts y
+    end
   end
 end
- puts "The route:"
-  puts the_route
 
-  end
-end
+
+

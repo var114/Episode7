@@ -7,11 +7,17 @@ class CalculatesRoute
     @total_distance = 0
     remaining_points = points
     route = []
-    route << remaining_points.slice!(remaining_points.index(start_point))
+    conf = remaining_points.index(start_point)
+
+    if conf.nil?
+      route << remaining_points.slice!(0)
+    else
+      route << remaining_points.slice!(conf)
+    end
     until remaining_points == [] do  
       next_point = shortest_distance(route.last, remaining_points)
-      @total_distance += next_point.fetch(:distance)
       route << remaining_points.slice!(remaining_points.index(next_point.fetch(:point)))
+      @total_distance += next_point.fetch(:distance) 
   end
     display = {route: route, distance: @total_distance}
   end

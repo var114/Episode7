@@ -13,11 +13,13 @@ class SalesPerson
   end
  
   def find_city(start_name)
-    @cities.find{|city| city if city.name == start_name}
+    found = cities.select{|city| city if city.name == start_name}
+    found.first
   end
 
   def route(start)
-    display = CalculatesRoute.calculate(cities, find_city(start))
+    city = find_city(start)
+    display = CalculatesRoute.calculate(cities, city)
     results = {route: display.fetch(:route), time: traveling_time(display.fetch(:distance))}
     z = []
     x = results.fetch(:route) 
