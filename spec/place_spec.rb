@@ -1,47 +1,45 @@
-require_relative "../lib/place"
-require_relative "../lib/map"
+require_relative '../lib/place'
+require_relative '../lib/map'
 
-
-describe Place do
-
-  it "should have a name" do 
+describe Place do   
+ 
+  it "should have a name" do
     subject.should respond_to(:name)
-
   end
+
   it "should have a coordinate" do
-    subject.coordinates = [29, -95]
-    subject.coordinates.should eq([29, -95])
+    subject.coordinates = [-29, -95]
+    subject.coordinates.should eq([-29, -95])
   end
 
   describe ":build" do
-    let(:name) { "El Paso, TX"}
+    let(:name) {"El Paso, TX"}
     let(:result) { stub("el paso", coordinates: [29, -95])}
 
   it "should build from the map" do
     Map.should_receive(:search).with(name).and_return(result)
     Place.build(name)
   end
-  
+
   it "should be place" do
     Map.stub(:search).with(name).and_return(result)
     Place.build(name).should be_a(Place)
   end
- end
-  
-describe "#to_s" do
-  it "should use the city as the to_s" do
-    subject.stub(:name) { "Boston" }
-    subject.to_s.should eq("Boston")
-  end
 end
 
-describe "#to_coordinates" do
-  it "should use the coordinates as the to_s" do
-    subject.stub(:coordinates) {[29, -95]}
-    subject.to_coordinates.should eq([29, -95])
-
+  describe "#to_s" do
+    it "should use the city as the to_s" do
+      subject.stub(:name) {"Boston"}
+      subject.to_s.should eq("Boston")
+    end
   end
-end
+
+  describe "#to_coordinates" do
+    it "should use the coordinates as the to_s" do
+      subject.stub(:coordinates) {[29, -95]}
+      subject.to_coordinates.should eq([29, -95])
+    end
+  end
 
 
 end

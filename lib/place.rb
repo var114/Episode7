@@ -1,24 +1,21 @@
 require_relative "./map"
+class Place
 
-class Place  
-  attr_accessor :name, :coordinates 
-
+attr_accessor :name, :coordinates
   def self.build(name)
-
     results = Map.search(name)
     Place.new.tap do |p|
       p.name = name
-      #puts name
-      p.coordinates = results.coordinates   
+      p.coordinates = results.coordinates
     end
   end
 
-  def to_s 
+  def to_s
     name
   end
- 
+
   def to_coordinates
     coordinates
   end
-  
-end
+
+end 

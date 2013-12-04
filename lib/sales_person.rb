@@ -1,24 +1,36 @@
+require_relative "./calculates_route"
+
 class SalesPerson
 
-  attr_reader :cities 
+  attr_reader :cities
 
   def initialize
-    @cities = [] 
+    @cities = []
   end
 
   def schedule_city(city)
     @cities << city unless @cities.include?(city)
-    p @cities
-
+  end
+ 
+  def find_city(start_name)
+    @cities.find{|city| city if city.name == start_name}
   end
 
-  def find_point(start_name)
-    @cities.find{|city| city if city.name == start_name }
+  def route(start)
+    display = CalculatesRoute.calculate(cities, find_city(start))
+    results = {route: display.fetch(:route), time: traveling_time(display.fetch(:distance))}
+    z = []
+    x = results.fetch(:route) 
+    y = results.fetch(:time)
+    z = [x, y]
+    return z
 
+   
+  
   end
 
-  def route(starting_point)
-    CalculatesRoute.calculate(cities, find_point(starting_point))
+  def traveling_time(distance)
+    time = distance/55
   end
 
 end
